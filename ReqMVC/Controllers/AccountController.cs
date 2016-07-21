@@ -87,5 +87,11 @@ namespace ReqMVC.Controllers
 			}
 			return View(model);
 		}
+
+		protected override void Dispose(bool disposing)
+		{
+			UserManager.Dispose();
+			base.Dispose(disposing);
+		}
 	}
 }

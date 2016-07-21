@@ -20,6 +20,7 @@ namespace ReqMVC.Controllers
 		{
 			get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
 		}
+
 		public ActionResult Index()
 		{
 			return View();
@@ -45,6 +46,7 @@ namespace ReqMVC.Controllers
 			foreach (var user in hdEntities.users)
 			{
 				await UserManager.CreateAsync(new ApplicationUser {UserName = user.name, userid = user.id}, user.password);
+				//migrated++;
 			}
 			Response.Write($"Мигрировано {migrated} пользователей");
 			Response.End();
@@ -54,7 +56,7 @@ namespace ReqMVC.Controllers
 		{
 			hdEntities.Dispose();
 			UserManager.Dispose();
-			base.Dispose();
+			base.Dispose(disposing);
 		}
 	}
 }
