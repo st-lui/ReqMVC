@@ -1,0 +1,15 @@
+﻿@using Mvc.JQuery.DataTables
+@using Mvc.JQuery.DataTables
+@model DataTableConfigVm
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@{
+
+    //var vm = Html.DataTableVm("table-id", (HomeController h) => h.GetUsers(null));
+    var vm = Model;
+
+}
+
+@Html.Partial("DataTable", vm)
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery.dt")
