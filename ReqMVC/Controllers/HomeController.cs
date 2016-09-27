@@ -45,8 +45,8 @@ namespace ReqMVC.Controllers
 			int migrated = 0;
 			foreach (var user in hdEntities.users)
 			{
-				await UserManager.CreateAsync(new ApplicationUser {UserName = user.name, userid = user.id}, user.password);
-				//migrated++;
+				IdentityResult x = await UserManager.CreateAsync(new ApplicationUser {UserName = user.name, userid = user.id}, user.password);
+				migrated++;
 			}
 			Response.Write($"Мигрировано {migrated} пользователей");
 			Response.End();

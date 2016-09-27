@@ -3,13 +3,14 @@
 @model DataTableConfigVm
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery.dt")
 @{
 
     //var vm = Html.DataTableVm("table-id", (HomeController h) => h.GetUsers(null));
     var vm = Model;
 
 }
-
+@Html.AntiForgeryToken()
+<h2>Список ваших заявок</h2>
 @Html.Partial("DataTable", vm)
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jquery.dt")

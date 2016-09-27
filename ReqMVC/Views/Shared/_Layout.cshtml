@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <hr />
+        </div>
+    </div>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,28 +26,33 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ">
                     <li>@Html.ActionLink("Домой", "Index", "Home")</li>
-                    <li class="dropdown">@Html.ActionLink("Заявки", "Index", "Request")</li>
-
+                    <li class="dropdown dropdown-li">
+                        <a href="@Url.Action("Index", "Request")" class ="dropdown-link">Заявки</a>
+                        @*@Html.ActionLink("Заявки", "Index", "Request", new {@class = "dropdown-link"})*@
+                        <a class="dropdown-caret dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul class='dropdown-menu dropdown-right'>
+                            <li><a href="@Url.Action("Create", "Request")">Добавление заявки</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Пользователи</a>
+                    </li>
                 </ul>
                 @Html.Partial("~/views/shared/_LoginPartial.cshtml")
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <hr/>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
+            @Scripts.Render("~/bundles/modernizr")
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)
             <p>&copy; @DateTime.Now.Year - УФПС Алтайского края - филиал ФГУП "Почта России"</p>
         </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

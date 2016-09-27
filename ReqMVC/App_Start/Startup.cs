@@ -16,6 +16,7 @@ namespace ReqMVC.App_Start
 		{
 			app.CreatePerOwinContext<IdentityContext>(IdentityContext.Create);
 			app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+			AutoMapperConfig.RegisterMappings();
 			app.UseCookieAuthentication(new CookieAuthenticationOptions
 			{
 				AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

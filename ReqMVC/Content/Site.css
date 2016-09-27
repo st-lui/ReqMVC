@@ -16,20 +16,20 @@
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
-
 div.centered-content {
     height: 100%;
     display: inline-block;
-    text-align:center;
+    text-align: center;
 }
-.navbar-brand img{ max-height: 30px;}
-.nav { font-size: 20px;}
+
+.navbar-brand img {
+    max-height: 30px;
+}
+
+.nav {
+    font-size: 20px;
+}
+
 body,
 h1,
 h2,
@@ -43,5 +43,82 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: "Georgia", Arial, sans-serif!important;
+    font-family: "Open Sans", Arial, sans-serif !important;
 }
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v13/DXI1ORHCpsQm3Vp6mXoaTYraN7vELC11_xip9Rz-hMs.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(https://fonts.gstatic.com/s/opensans/v13/RjgO7rYTmqiVp7vzi-Q5UT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Open Sans Semibold'), local('OpenSans-Semibold'), url(https://fonts.gstatic.com/s/opensans/v13/MTP_ySUJH_bn48VBG8sNSoraN7vELC11_xip9Rz-hMs.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v13/k3k702ZOKiLJc3WVjuplzIraN7vELC11_xip9Rz-hMs.woff) format('woff');
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*классы для выпадающего меню, совмещенного со ссылкой*/
+.dropdown-li {
+    display: inline-block !important;
+}
+
+.dropdown-link {
+    display: inline-block !important;
+    padding-right: 4px !important;
+}
+
+.dropdown-caret {
+    display: inline-block !important;
+    padding-left: 4px !important;
+}
+
+.nav > li:hover {
+    background-color: #022F5A;
+}
+
+.nav > li.open {
+    background-color: #022F5A;
+}
+/*классы для выпадающего меню, совмещенного со ссылкой*/

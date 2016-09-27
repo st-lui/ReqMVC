@@ -1,0 +1,100 @@
+﻿@model ReqMVC.Models.ViewModel.RequestUpdateModel
+
+@{
+    ViewBag.Title = "Редактирование заявки";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="well col-md-6">
+        @using (Html.BeginForm("Update", "Request", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <legend>
+                    Внесите необходимые изменения
+                </legend>
+                @Html.HiddenFor(model => model.id)
+                <div class="form-group col-lg-12">
+                    @Html.LabelFor(model => model.text, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.text, new { @class = "form-control col-lg-12" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.text)
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    @Html.Label("Оборудование в заявке", new { @class = "control-label" })
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Организация</th>
+                                <th>Модель оборудования</th>
+                                <th>Серийный номер</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@Html.DisplayFor(x => x.organization)</td>
+                                <td>@Html.DisplayFor(x => x.deviceinfo.model)</td>
+                                <td>@Html.DisplayFor(x => x.deviceinfo.serial_number)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group col-lg-12">
+                    @Html.LabelFor(model => model.contact, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.contact, new { @class = "form-control col-lg-12" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.contact)
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    @Html.LabelFor(model => model.datecreated, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.datecreated, "{0:dd.MM.yyyy hh:mm:ss}", new { @class = "form-control col-lg-12", @readonly = "readonly", data_val_date = "Введите корректную дату" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.datecreated)
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    @Html.LabelFor(model => model.statusList, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.status_id, Model.statusList, new { @class = "form-control col-lg-12", id = "statusList" })
+                </div>
+                <div class="form-group col-lg-12" id="solveDateGroup">
+                    @Html.LabelFor(model => model.datesolved, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.datesolved, "{0:dd.MM.yyyy hh:mm:ss}", new { @class = "form-control col-lg-12", data_val_date = "Введите корректную дату", id = "dateSolved" })
+                    <div>
+                        @Html.ValidationMessageFor(model => model.datesolved)
+                    </div>
+                </div>
+                <div class="form-group col-lg-12">
+                    @Html.LabelFor(model => model.bf_comment, new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.bf_comment, new { @class = "form-control col-lg-12" })
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </fieldset>
+
+        }
+    </div>
+</div>
+@section scripts
+{
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            function selectListChange($statusVal) {
+                if ($statusVal == 1)
+                    $("#solveDateGroup").hide();
+                else
+                    $("#solveDateGroup").show();
+            }
+            function firstLoad() {
+                selectListChange($("#statusList").val());
+            }
+            
+            firstLoad();
+            $("#statusList").change(function () {
+                selectListChange($(this).val());
+            });
+        });
+    </script>
+}
