@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -24,14 +25,17 @@ namespace ReqMVC.Controllers
 
 		HdEntities entities = new HdEntities();
 		IdentityContext usersContext = new IdentityContext();
+		private ApplicationUserManager UserManager
+		{
+			get { return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+		}
 
 		// GET: Request
 		[HttpGet]
 		public ActionResult Index()
 		{
-			string actionUrl = Url.Action(nameof(GetRequests));
-			var dataTablesViewModel = DataTablesHelper.DataTableVm<RequestDTO>("xxx", actionUrl);
-			dataTablesViewModel.Language = "{ 'sUrl': '" + Url.Content("~/Content/dataTables.ru.lang.json") + "' }";
+			DataTableConfigVm dataTablesViewModel = DataTablesHelper.DataTableVm<RequestDTO>("xxx", Url.Action(nameof(GetRequests)));
+			dataTablesViewModel.Language = $"{{'sUrl':'{Url.Content("~/Content/dataTables.ru.lang.json")}'}}";
 			return View(dataTablesViewModel);
 		}
 
@@ -179,6 +183,16 @@ namespace ReqMVC.Controllers
 			entities.SaveChanges();
 			return RedirectToAction("/");
 		}
-
+		public async Task MigrateUsers()
+		{
+			int migrated = 0;
+			foreach (var user in entities.users)
+			{
+				IdentityResult x = await UserManager.CreateAsync(new ApplicationUser { UserName = user.name, userid = user.id }, user.password);
+				migrated++;
+			}
+			Response.Write($"Мигрировано {migrated} пользователей");
+			Response.End();
+		}
 	}
 }
